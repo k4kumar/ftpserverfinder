@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:ftpserverfinder/server_list.dart';
 import 'package:ftpserverfinder/services/site_reachability.dart';
 import 'package:http/http.dart' as http;
 
@@ -116,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     child: Wrap(
                       children: [
-                        const Text("Finding FTP Server...", style: TextStyle(color: Colors.white, fontSize: 20),),
+                        const Text("Finding FTP Server...Please wait patiently.", style: TextStyle(color: Colors.white, fontSize: 20),),
                         ListView.builder(
                           itemCount: reachable.length,
                           itemBuilder: (context, index) {
