@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:ftpserverfinder/server_list.dart';
-import 'package:ftpserverfinder/services/site_reachability.dart' as reachable;
+import 'package:ftpserverfinder/services/site_reachability.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -40,11 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     fetchServers();
-    checkServers();
   }
 
   Future<void> fetchServers() async {
-    final url = 'https://raw.githubusercontent.com/yourusername/yourrepo/main/servers.txt'; // Update with your URL
+    final url = 'https://github.com/k4kumar/ftpserverfinder/blob/master/assets/server_list.txt'; // Update with your URL
 
     try {
       final response = await http.get(Uri.parse(url));
@@ -61,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void checkServers() async {
+  Future<void> checkServers() async {
     List<String> reachable = [];
 
     for (String server in servers) {
@@ -70,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
         reachable.add(server);
       }
     }
-
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +114,23 @@ class _MyHomePageState extends State<MyHomePage> {
                         Color((0xFFFFFFFF)).withOpacity(0.5),
                       ],
                     ),
-                    child: const Text("Finding FTP Server...", style: TextStyle(color: Colors.white, fontSize: 20),)
+                    child: Wrap(
+                      children: [
+                        const Text("Finding FTP Server...", style: TextStyle(color: Colors.white, fontSize: 20),),
+                        ListView.builder(
+                          itemCount: reachable.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 10,
+                              child: Text(reachable[index]),
+                            );
+                          },
+                        ),
+                      ],
+                    )
+
+
+                    //const Text("Finding FTP Server...", style: TextStyle(color: Colors.white, fontSize: 20),)
                 ),
               ),
             ),
