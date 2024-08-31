@@ -38,6 +38,8 @@ dependencies:
   get: ^4.6.6
   glassmorphism: ^3.0.0
   http: ^1.2.2
+  url_launcher: ^6.3.0
+  shared_preferences: ^2.3.2
 
 
 dev_dependencies:
